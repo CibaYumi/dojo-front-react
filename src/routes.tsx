@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import App from './pages/app';
 import Home from './pages/home';
 
 function AppRoutes() {
@@ -11,6 +12,7 @@ function AppRoutes() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<App />} />
           <Route path="/home" element={<Home />} />
         </Routes>
       </BrowserRouter>
