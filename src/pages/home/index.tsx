@@ -6,8 +6,8 @@ import Card from '../../components/Card';
 import './styles.scss';
 
 interface ToDo {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 function Home() {
@@ -26,25 +26,32 @@ function Home() {
   const [description, setDescription] = useState<string>('');
 
   const handleClose = () => {
-    setShow(false)
-    setTitle('')
-    setDescription('')
+    setShow(false);
+    setTitle('');
+    setDescription('');
   };
+
   const handleShow = () => setShow(true);
+
   const handleSubmit = () => {
-    console.log(title);
-    console.log(description);
-    
-    handleClose()
-  }
-  
+    handleClose();
+    addToDo();
+  };
+
+  const addToDo = () => {
+    setToDoList([...toDoList, { title, description }]);
+  };
+
+  const deleteToDo = (indexToDelete: number) => {
+    setToDoList(toDoList.filter((item, index) => indexToDelete !== index));
+  };
+
   return (
     <div className='container'>
-      {toDoList.map(item => <Card title={item.title} description={item.description} />)}
+      {toDoList.map((item, index) => <Card title={item.title} description={item.description} handleDelete={() => deleteToDo(index)} />)}
       <Button variant="primary" onClick={handleShow}>
         Adicionar
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Criar tarefa</Modal.Title>
@@ -79,7 +86,8 @@ function Home() {
           <Button variant="secondary" onClick={handleClose}>
             Fechar
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          {/*Nao colocar o disabled na aula */}
+          <Button type="submit" variant="primary" onClick={handleSubmit} disabled={!title.length || !description.length}>
             Salvar
           </Button>
         </Modal.Footer>
