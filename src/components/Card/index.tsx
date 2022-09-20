@@ -7,7 +7,7 @@ interface Props {
   description: string;
   handleDelete: () => void;
 }
-
+ 
 function Card(props: Props) {
   const { title, description, handleDelete } = props
 
