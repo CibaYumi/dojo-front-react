@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Button } from 'react-bootstrap';
 import {
   BrowserRouter,
   Routes,
@@ -17,7 +15,7 @@ function App() {
         <Route path="/" element={<Inicio />} />
         <Route path="/home" element={<Home />} />
       </Routes>
-  </BrowserRouter>
+    </BrowserRouter>
   );
 }
 

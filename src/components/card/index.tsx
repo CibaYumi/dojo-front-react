@@ -3,13 +3,14 @@ import { Button } from 'react-bootstrap';
 import './styles.scss';
 
 interface Props {
-    title: string
-    description: string
-    excluir: () => void
+    title: string,
+    description: string,
+    excluir: () => void,
+    editar: () => void,
 }
 
-function Card(props: Props) { 
-    const { title, description, excluir } = props;
+function Card(props: Props) {
+    const { title, description, excluir, editar } = props;
     return (
         <div>
             <div className='card'>
@@ -20,6 +21,9 @@ function Card(props: Props) {
                 <div style={{ marginLeft: '10px' }}>
                     <Button variant="danger" onClick={() => excluir()}>
                         Excluir
+                    </Button>
+                    <Button variant="warning" onClick={() => editar()} style={{ marginLeft: '10px' }}>
+                        Editar
                     </Button>
                 </div>
             </div>
