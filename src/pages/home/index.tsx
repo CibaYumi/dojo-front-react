@@ -40,23 +40,25 @@ function Home() {
     };
     const handleShowModal = () => setShowModal(true);
 
-    const salvaToDo = () => {
-        if (showEdit) {
-            let itemToEdit = toDoList.map(item => item.id === id ? { id: id, title: title, description: description } : item)
-            setToDoList(itemToEdit)
-            localStorage.setItem('toDos', JSON.stringify(itemToEdit));
-        } else {
-            setToDoList([...toDoList, {
-                id: uuidv4(),
-                title: title,
-                description: description
-            }])
-            localStorage.setItem('toDos', JSON.stringify([...toDoList, {
-                id: uuidv4(),
-                title: title,
-                description: description
-            }]));
-        }
+    const editToDo = () => {
+        let itemToEdit = toDoList.map(item => item.id === id ? { id: id, title: title, description: description } : item)
+        setToDoList(itemToEdit)
+        localStorage.setItem('toDos', JSON.stringify(itemToEdit));
+
+        handleClose();
+    }
+
+    const createToDo = () => {
+        setToDoList([...toDoList, {
+            id: uuidv4(),
+            title: title,
+            description: description
+        }])
+        localStorage.setItem('toDos', JSON.stringify([...toDoList, {
+            id: uuidv4(),
+            title: title,
+            description: description
+        }]));
         handleClose();
     }
 
@@ -131,7 +133,7 @@ function Home() {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" disabled={!title || !description} onClick={salvaToDo}>
+                    <Button variant="primary" disabled={!title || !description} onClick={showEdit ? editToDo : createToDo}>
                         {showEdit ? "Salvar Alterações" : "Salvar"}
                     </Button>
                 </Modal.Footer>
