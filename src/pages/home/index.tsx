@@ -7,6 +7,8 @@ import './styles.scss';
 import { ToDoModel } from '../../models/ToDo';
 import ToDoController from '../../controllers/ToDoController';
 import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 function Home() {
     const [toDoList, setToDoList] = useState<ToDoModel[]>([])
@@ -16,6 +18,8 @@ function Home() {
     const [id, setId] = useState<string>('')
     const [title, setTitle] = useState<string>('')
     const [description, setDescription] = useState<string>('')
+
+    const user = useSelector((state: RootState) => state.user.user)
 
     useEffect(() => {
         const toDoListResponse = ToDoController.getToDoList()
@@ -60,7 +64,8 @@ function Home() {
 
     return (
         <div>
-            <h1>Olá, {Cookies.get('userName')}</h1>
+            <h1>Olá, cookie {Cookies.get('userName')}</h1>
+            <h1>Olá, redux {user.name}</h1>
             <h1>ToDo List</h1>
             {toDoList.map((item, index) =>
                 <Card

@@ -14,7 +14,7 @@ function Card(props: Props) {
     return (
         <div>
             <div className='card'>
-                <div>
+                <div style={{ overflowWrap: 'anywhere' }}>
                     <div>{title}</div>
                     <div>{description}</div>
                 </div>
