@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import './styles.scss';
 import { ToDoModel } from '../../models/ToDo';
 import ToDoController from '../../controllers/ToDoController';
+import Cookies from 'js-cookie';
 
 function Home() {
     const [toDoList, setToDoList] = useState<ToDoModel[]>([])
@@ -59,6 +60,7 @@ function Home() {
 
     return (
         <div>
+            <h1>Olá, {Cookies.get('userName')}</h1>
             <h1>ToDo List</h1>
             {toDoList.map((item, index) =>
                 <Card
