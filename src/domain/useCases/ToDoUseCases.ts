@@ -1,6 +1,7 @@
 import { ToDoModel } from "../models/ToDo"
 import ToDoRepository from "../../infrastructure/repositories/ToDoRepository"
-
+import store from "../../infrastructure/redux/store"
+import Utils from "../../infrastructure/utils/utils"
 export class ToDo {
     repository: ToDoRepository
   
@@ -17,7 +18,9 @@ export class ToDo {
     }
 
     deleteToDo(idToDelete: string): void {
-        this.repository.deleteToDo(idToDelete)
+        if (Utils.isAdmin()) {
+            this.repository.deleteToDo(idToDelete)
+        }
     }
 
     editToDo(id: string, toDoTitle: string, toDoDescription: string): void {

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import Utils from '../../../utils/utils';
 import './styles.scss';
 
 interface Props {
@@ -19,9 +22,9 @@ function Card(props: Props) {
                     <div>{description}</div>
                 </div>
                 <div style={{ marginLeft: '10px' }}>
-                    <Button variant="danger" onClick={() => excluir()}>
+                    {Utils.isAdmin() && <Button variant="danger" onClick={() => excluir()}>
                         Excluir
-                    </Button>
+                    </Button>}
                     <Button variant="warning" onClick={() => editar()} style={{ marginLeft: '10px' }}>
                         Editar
                     </Button>
