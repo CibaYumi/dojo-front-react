@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/user/userSlice';
+import { setUser } from '../../../redux/user/userSlice';
 
 function Inicio() {
     const navigate = useNavigate()

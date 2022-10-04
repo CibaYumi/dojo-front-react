@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ToDoModel } from '../models/ToDo';
+import { ToDoModel } from '../../domain/models/ToDo';
 
 
 export default class ToDoRepository {

@@ -1,5 +1,5 @@
-import { ToDoModel } from "../models/ToDo"
-import { ToDo } from "../useCases/ToDoUseCases"
+import { ToDoModel } from "../../domain/models/ToDo"
+import { ToDo } from "../../domain/useCases/ToDoUseCases"
 
 export default class ToDoController {
     static getToDoList(): ToDoModel[] {

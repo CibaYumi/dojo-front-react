@@ -5,8 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 import './App.scss';
-import Home from './pages/home';
-import Inicio from './pages/inicio';
+import Home from './infrastructure/views/pages/home';
+import Inicio from './infrastructure/views/pages/inicio';
 
 function App() {
   return (

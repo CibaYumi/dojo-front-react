@@ -4,11 +4,11 @@ import Card from '../../components/card';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import './styles.scss';
-import { ToDoModel } from '../../models/ToDo';
-import ToDoController from '../../controllers/ToDoController';
+import { ToDoModel } from '../../../../domain/models/ToDo';
+import ToDoController from '../../../controllers/ToDoController';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { RootState } from '../../../redux/store';
 
 function Home() {
     const [toDoList, setToDoList] = useState<ToDoModel[]>([])

@@ -1,5 +1,5 @@
 import { ToDoModel } from "../models/ToDo"
-import ToDoRepository from "../repositories/ToDoRepository"
+import ToDoRepository from "../../infrastructure/repositories/ToDoRepository"
 
 export class ToDo {
     repository: ToDoRepository
