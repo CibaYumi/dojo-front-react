@@ -64,8 +64,14 @@ function Home() {
 
     return (
         <div>
-            <h1>Olá, cookie {Cookies.get('userName')}</h1>
-            <h1>Olá, redux {user.name}</h1>
+            <div>
+                <p>
+                    Olá, cookie {Cookies.get('userName')}
+                </p>
+                <p>
+                    Olá, redux {user.name}
+                </p>
+            </div>
             <h1>ToDo List</h1>
             {toDoList.map((item, index) =>
                 <Card
