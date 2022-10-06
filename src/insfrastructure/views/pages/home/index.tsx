@@ -1,36 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Card from '../../components/card';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { v4 as uuidv4 } from 'uuid';
 import './styles.scss';
-
-interface ToDo {
-    id: string,
-    title: string,
-    description: string
-}
+import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { ToDoModel } from '../../../../domain/models/ToDoModel';
+import ToDoController from '../../../controllers/ToDoController';
 
 function Home() {
-    const [toDoList, setToDoList] = useState<ToDo[]>(JSON.parse(localStorage.getItem('toDos') as string) || [
-        {
-            id: uuidv4(),
-            title: 'Fazer conteúdo do Dojo',
-            description: 'Especificar quais conteúdos serão apresentados no Dojo'
-        },
-        {
-            id: uuidv4(),
-            title: 'Criar invite do Dojo',
-            description: 'Criar agenda no calendário e adicionar convidados'
-        }
-    ])
+    const [toDoList, setToDoList] = useState<ToDoModel[]>([])
 
     const [showModal, setShowModal] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [id, setId] = useState<string>('')
     const [title, setTitle] = useState<string>('')
     const [description, setDescription] = useState<string>('')
+    const user = useSelector((state: RootState) => state.user.user)
+
+    useEffect(() => {
+        const toDoResponse = ToDoController.getToDoList()
+        setToDoList(toDoResponse)
+    }, [])
 
     const handleClose = () => {
         setShowModal(false)
@@ -62,13 +56,14 @@ function Home() {
         handleClose();
     }
 
-    const excluiToDo = (indexToDelete: number) => {
-        const newToDoList = toDoList.filter((item, index) => index !== indexToDelete)
-        setToDoList(newToDoList)
-        localStorage.setItem('toDos', JSON.stringify(newToDoList));
+    const excluiToDo = (idToDelete: string) => {
+        ToDoController.deleteToDo(idToDelete)
+        const toDoListResponse = ToDoController.getToDoList()
+        setToDoList(toDoListResponse)
+    
     }
 
-    const habilitaEdicao = (itemToEdit: ToDo) => {
+    const habilitaEdicao = (itemToEdit: ToDoModel) => {
         setId(itemToEdit.id)
         setTitle(itemToEdit.title)
         setDescription(itemToEdit.description)
@@ -79,12 +74,16 @@ function Home() {
 
     return (
         <div>
+            <div>
+                <p>Olá, cookie username: {Cookies.get('userName')}</p>
+                <p>Olá, redux username: {user.name}</p>
+            </div>
             <h1>ToDo List</h1>
             {toDoList.map((item, index) =>
                 <Card
                     title={item.title}
                     description={item.description}
-                    excluir={() => excluiToDo(index)}
+                    excluir={() => excluiToDo(item.id)}
                     editar={() => habilitaEdicao(item)}
                 />
             )}
